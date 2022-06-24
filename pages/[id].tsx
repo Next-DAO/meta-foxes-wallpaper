@@ -22,6 +22,13 @@ function getCanvasSize() {
   return { width: w, heigth: h };
 }
 
+function isSameColor(color1: Uint8ClampedArray, color2: Uint8ClampedArray) {
+  if (color1[0] !== color2[0] || color1[1] !== color2[1] || color1[2] !== color2[2]) {
+    return false;
+  }
+  return true;
+}
+
 const Canvas: FC<{ image: HTMLImageElement }> = ({ image }) => {
   const [result, setResult] = useState("");
 
@@ -32,13 +39,18 @@ const Canvas: FC<{ image: HTMLImageElement }> = ({ image }) => {
     canvas.height = heigth;
     const ctx = canvas.getContext("2d")!;
     ctx.drawImage(image, 0, 0);
-    const { data: bgColor } = ctx.getImageData(1, 1, 1, 1);
+    const { data: bgColor1 } = ctx.getImageData(1, 1, 1, 1);
     const { data: bgColor2 } = ctx.getImageData(1, 200, 1, 1);
+    const { data: bgColor3 } = ctx.getImageData(1, 400, 1, 1);
+    const { data: bgColor4 } = ctx.getImageData(1, 600, 1, 1);
+    const { data: bgColor5 } = ctx.getImageData(1, 800, 1, 1);
+    const { data: bgColor6 } = ctx.getImageData(1, 999, 1, 1);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = `rgb(${bgColor[0]},${bgColor[1]},${bgColor[2]})`;
+    ctx.fillStyle = `rgb(${bgColor1[0]},${bgColor1[1]},${bgColor1[2]})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const imageSize = (bgColor[0] !== bgColor2[0] || bgColor[1] !== bgColor2[1]) ? canvas.width : Math.floor((canvas.width * 6) / 7);
+    const isPureBg = isSameColor(bgColor1, bgColor2) && isSameColor(bgColor1, bgColor3) && isSameColor(bgColor1, bgColor4) && isSameColor(bgColor1, bgColor5) && isSameColor(bgColor1, bgColor6)
+    const imageSize = !isPureBg ? canvas.width : Math.floor((canvas.width * 6) / 7);
     ctx.drawImage(image, (canvas.width - imageSize) / 2, canvas.height - imageSize, imageSize, imageSize);
 
     const dataUrl = canvas.toDataURL("image/png");
