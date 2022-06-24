@@ -5,8 +5,8 @@ const Home: NextPage = () => {
   return (
     <div>
       <h3>Example</h3>
-      <Link href="/1024">
-        <a>/1024</a>
+      <Link href="/1">
+        <a>/1</a>
       </Link>
     </div>
   );
