@@ -7,8 +7,8 @@ function fetcher(url: string) {
   return fetch(url).then((r) => r.json());
 }
 
-function getApiUrl(id: string) {
-  return `https://nft-api-five.vercel.app/api/metadata?contract_address=0x3acce66cd37518a6d77d9ea3039e00b3a2955460&token_id=${id}`;
+function getImage(id: string) {
+  return `https://dml9bs35yz8y5.cloudfront.net/${id}.png`;
 }
 
 function getCanvasSize() {
@@ -57,21 +57,21 @@ const WallpaperPage: FC = () => {
   const { id } = router.query as { id: string };
   const [image, setImage] = useState<HTMLImageElement | null>(null);
 
-  const { data } = useSWR(id ? getApiUrl(id) : null, fetcher);
+
+  const imageURL  = getImage(id);
 
   useEffect(() => {
-    if (!data?.image) {
-      return;
-    }
+    if (id === null || id === undefined || parseInt(id, 10) > 57) return;
+
     const img = new Image();
     img.onload = function () {
       setImage(img);
     };
     img.crossOrigin = "Anonymous";
-    img.src = data.image;
-  }, [data?.image]);
+    img.src = imageURL;
+  }, [imageURL]);
 
-  if (!id || !data || !image) {
+  if (!id || !imageURL|| !image) {
     return <Loading />;
   }
 
