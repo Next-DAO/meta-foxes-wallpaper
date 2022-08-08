@@ -73,7 +73,7 @@ const WallpaperPage: FC = () => {
   const imageURL  = getImage(id);
 
   useEffect(() => {
-    if (id === null || id === undefined || parseInt(id, 10) > 57) return;
+    if (id === null || id === undefined || parseInt(id, 10) > 74) return;
 
     const img = new Image();
     img.onload = function () {
