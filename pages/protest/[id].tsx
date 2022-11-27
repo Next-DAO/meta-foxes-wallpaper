@@ -70,7 +70,7 @@ const WallpaperPage: FC = () => {
     img.src = imageURL;
   }, [router.isReady]);
 
-  if (!id) {
+  if (!router.isReady) {
     return <Loading />;
   }
 
