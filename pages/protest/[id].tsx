@@ -57,11 +57,11 @@ const WallpaperPage: FC = () => {
     };
   }, []);
 
-  const imageURL  = getImage(id);
 
   useEffect(() => {
     if (!router.isReady) return;
 
+    const imageURL  = getImage(id);
     const img = new Image();
     img.onload = function () {
       setImage(img);
@@ -70,7 +70,7 @@ const WallpaperPage: FC = () => {
     img.src = imageURL;
   }, [router.isReady]);
 
-  if (!id || !imageURL|| !image) {
+  if (!id) {
     return <Loading />;
   }
 
