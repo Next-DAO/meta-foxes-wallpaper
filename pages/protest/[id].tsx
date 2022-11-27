@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 
 function getImage(id: string) {
-  return `https://dml9bs35yz8y5.cloudfront.net/${id}.png?t=${Date.now()}`;
+  return `https://dml9bs35yz8y5.cloudfront.net/${id}.png`;
 }
 
 const Canvas: FC<{ image: HTMLImageElement | null, paper: HTMLImageElement | null }> = ({ image, paper }) => {
@@ -49,7 +49,7 @@ const WallpaperPage: FC = () => {
 
   useEffect(() => {
     const s = new Image();
-    s.src = "/paper_2.png";
+    s.src = "/paper.png";
 
     s.crossOrigin = "Anonymous";
     s.onload = function () {
@@ -68,7 +68,7 @@ const WallpaperPage: FC = () => {
     };
     img.crossOrigin = "Anonymous";
     img.src = imageURL;
-  }, [id]);
+  }, [imageURL]);
 
   if (!id || !imageURL|| !image) {
     return <Loading />;
