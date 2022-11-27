@@ -68,7 +68,7 @@ const WallpaperPage: FC = () => {
     };
     img.crossOrigin = "Anonymous";
     img.src = imageURL;
-  }, [imageURL]);
+  }, [id]);
 
   if (!id || !imageURL|| !image) {
     return <Loading />;
