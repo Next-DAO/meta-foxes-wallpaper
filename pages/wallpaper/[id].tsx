@@ -1,11 +1,8 @@
+import useSWR from "swr";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
-import useSWR from "swr";
-import Loading from "../components/Loading";
 
-function fetcher(url: string) {
-  return fetch(url).then((r) => r.json());
-}
+import Loading from "../../components/Loading";
 
 function getImage(id: string) {
   return `https://dml9bs35yz8y5.cloudfront.net/${id}.png`;
@@ -73,7 +70,7 @@ const WallpaperPage: FC = () => {
   const imageURL  = getImage(id);
 
   useEffect(() => {
-    if (id === null || id === undefined || parseInt(id, 10) > 74) return;
+    if (id === null || id === undefined || parseInt(id, 10) > 73) return;
 
     const img = new Image();
     img.onload = function () {
