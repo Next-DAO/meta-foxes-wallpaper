@@ -8,14 +8,10 @@ function getImage(id: string) {
   return `https://dml9bs35yz8y5.cloudfront.net/${id}.png?t=${Date.now()}`;
 }
 
-const Canvas: FC<{ image: HTMLImageElement | null, paper: HTMLImageElement | null }> = ({ image, paper }) => {
+const Canvas: FC<{ image: HTMLImageElement, paper: HTMLImageElement}> = ({ image, paper }) => {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    if (image === null || paper === null) {
-      return;
-    }
-
     const width = 1000;
     const height = 1000;
 
@@ -28,11 +24,10 @@ const Canvas: FC<{ image: HTMLImageElement | null, paper: HTMLImageElement | nul
 
     ctx.drawImage(image, 0, 0, width, height);
     ctx.drawImage(paper, 0, 0, width, height);
-    // ctx.drawImage(paper, -180, -400, 1400, 1400);
 
     const dataUrl = canvas.toDataURL("image/png");
     setResult(dataUrl);
-  }, [image]);
+  }, []);
 
   if (!result) {
     return <Loading />;
@@ -70,7 +65,7 @@ const WallpaperPage: FC = () => {
     img.src = imageURL;
   }, [router.isReady]);
 
-  if (!router.isReady) {
+  if (!router.isReady || !image || !paper) {
     return <Loading />;
   }
 
