@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     }
 
     const tokenIdNumber = parseInt(tokenId, 10);
-    if (tokenIdNumber < 1 || tokenIdNumber > 90) {
+    if (tokenIdNumber < 1 || tokenIdNumber > 140) {
       alert("Invalid token id, please try again!");
       return;
     }
@@ -65,13 +65,6 @@ const Home: NextPage = () => {
             disabled={isSubmitting}
           >
             {isSubmitting ? "Generating..." : "Generate Wallpaper"}
-          </button>
-          <button
-            className="block w-64 text-center h-14 mt-4 text-white py-2 rounded-full border border-4 border-black bg-[#6E4529]"
-            onClick={(e) => handleSubmit("protest")}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Generating..." : "Generate Protest PFP"}
           </button>
         </div>
       </main>
