@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     }
 
     const tokenIdNumber = parseInt(tokenId, 10);
-    if (tokenIdNumber < 1 || tokenIdNumber > 149) {
+    if (tokenIdNumber < 1 || tokenIdNumber > 200) {
       alert("Invalid token id, please try again!");
       return;
     }
